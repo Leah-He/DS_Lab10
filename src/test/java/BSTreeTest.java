@@ -1,87 +1,134 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BSTreeTest<T> {
 
-	BSTNode<Interger> tree;
+	BSTree tree;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		tree = new BSTNode<Interger>();
+		tree = new BSTree();
 	}
 
 	@Test
 	void test() {
 		//test isEmpty()
-		/**
-	       returns true if the tree is empty
-	     */
-		assertTrue(tree.isEmpty);
+		assertTrue(tree.isEmpty());
+		assertEquals(0, tree.getSize()); //test size when empty
 		
 		tree.insert(10);
-		assertFalse(tree.isEmpty);
+		assertFalse(tree.isEmpty());
 		
 		
+		//test insert() and //test retrieve() 
+		assertEquals(10, tree.retrieve(10));
+		assertNull(tree.retrieve(100)); //check the num should not in the tree
 		
-		//test insert() 
-		/**
-	       inserts target into the tree
-	     */
-		assertequals()
-		
-		
-		//test retrieve() 
-		/**
-	       returns the Integer if it is present in the tree
-	       returns null if target is not in the tree.
-	     */
 		
 		
 		//test retrieveDepth()
-		/**
-	       This is not a normal method for a tree
-	       It will return the height of the node that contains the target
-	       (note that root is 0)
-
-	       However, if the node is not present, return the height that 
-	       the node would be if you add it.
-	     */
+			//root -> 10
+		assertEquals(0, tree.retrieveDepth(10));
+		assertEquals(1, tree.retrieveDepth(100));
 		
 		//test getsize()?
+		assertEquals(1, tree.getSize());
+		
+		
 		
 		//test largest()
-		/**
-	       Returns the largest value in the tree.
-
-	       Your solution should have average time of Theta( log N)
-
-	       return null, if the tree is empty
-	    */
+		tree.insert(11);
+		tree.insert(9);
+		assertEquals(11, tree.largest());
+			//large tree
+		BSTree largeTree = new BSTree();
+		for (int i = 1; i <= 100; i++) {largeTree.insert(i);}
+		assertEquals(100, largeTree.largest());
+		
+			//test just one node:
+		BSTree treewith1n= new BSTree();
+		treewith1n.insert(6);
+		assertEquals(6, treewith1n.largest());
+		
+			//test empty:
+		BSTree empTree = new BSTree();
+		assertNull(empTree.largest());
+		
+		
 		
 		//test toList()
-		/**
-	       Returns a list of all the values in the tree.
-
-	       Instead of using an inner class, this time use an anonymous class
-	       Most of the code has been set up for you.
-	    */
+		List<Integer> list = List.of(9, 10, 11);
+		assertEquals(list, tree.toList());
 		
 		//test sum()
+		assertEquals(30, tree.sum());
+		assertEquals(5050, largeTree.sum());
+		
 		
 		//test myEquals
-		/**
-	       Returns true if this tree is equal to that tree, false otherwise.
-
-	       A tree is equal if they have not only the same stored valued
-	       but also the same structure.  For example, a tree with inserted
-	       values {5,1,10} would not be equal to a BST with inserted
-	       values {1,5,10}.
-
-	       Note: we didn't use equals because it is slightly more complex to get right.
-	     */
+			//test empty tree：
+		BSTree empTree1 = new BSTree();
+		BSTree empTree2 = new BSTree();
+		assertTrue(empTree1.myEquals(empTree2));
 		
+			//test itself:
+		assertTrue(tree.myEquals(tree));
+		
+			//same structure and same value:
+		BSTree tree2 = new BSTree();
+		tree2.insert(10);
+		tree2.insert(11);
+		tree2.insert(9);
+		assertTrue(tree.myEquals(tree2));
+		
+			//different values:
+		BSTree tree3 = new BSTree();
+        tree3.insert(10);
+        tree3.insert(11);
+        tree3.insert(8);
+        assertFalse(tree.myEquals(tree3));
+		
+        	//different structure:
+        BSTree tree4 = new BSTree();
+        tree4.insert(10);
+        tree4.insert(8);
+        tree4.insert(11);
+        assertFalse(tree.myEquals(tree4));	
+        
+        	//less value:
+        BSTree tree5 = new BSTree();
+        tree5.insert(10);
+        tree5.insert(11);
+        //tree5.insert(9);
+        assertFalse(tree.myEquals(tree5));
+        
+        	//more value:
+        BSTree tree6 = new BSTree();
+        tree6.insert(10);
+        tree6.insert(11);
+        tree6.insert(9);
+        tree6.insert(8);
+        assertFalse(tree.myEquals(tree6));
+        	
+        	//less value2:
+        BSTree tree7 = new BSTree();
+        tree7.insert(10);
+        //tree7.insert(11);
+        tree7.insert(9);
+        assertFalse(tree.myEquals(tree7));
+        
+        	//more value2:
+        BSTree tree8 = new BSTree();
+        tree8.insert(10);
+        tree8.insert(11);
+        tree8.insert(9);
+        tree8.insert(8);
+        assertFalse(tree.myEquals(tree8));
+        
 	}
 
 }
