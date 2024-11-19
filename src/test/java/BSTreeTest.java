@@ -32,8 +32,10 @@ class BSTreeTest<T> {
 		
 		//test retrieveDepth()
 			//root -> 10
+		
 		assertEquals(0, tree.retrieveDepth(10));
 		assertEquals(1, tree.retrieveDepth(100));
+		
 		
 		//test getsize()?
 		assertEquals(1, tree.getSize());
@@ -70,11 +72,40 @@ class BSTreeTest<T> {
 		
 		
 		//test myEquals
-			//test empty tree：
+		int[] A = {50, 72, 96, 94, 107, 26, 12, 11, 9, 10, 25, 51, 16, 17, 95};
+		
+		int[] B10 = {50, 72, 96, 94, 107, 26, 12, 11, 9, 25, 51, 16, 17, 95};
+        int[] C18A = {50, 72, 96, 94, 107, 26, 12, 11, 9, 10, 25, 51, 16, 17, 95, 18};
+        int[] D51 = {50, 72, 96, 94, 107, 26, 12, 11, 9, 10, 25, 16, 17, 95};
+        int[] E51A = {50, 72, 96, 94, 107, 26, 12, 11, 9, 10, 25, 51, 16, 17, 95, 51};
+        
+        BSTree tA = new BSTree();
+        BSTree tB10 = new BSTree();
+        BSTree tC18A = new BSTree();
+        BSTree tD51 = new BSTree();
+        BSTree tE51A = new BSTree();
+        
+        for (int val : A) tA.insert(val);
+        for (int val : B10) tB10.insert(val);
+        for (int val : C18A) tC18A.insert(val);
+        for (int val : D51) tD51.insert(val);
+        for (int val : E51A) tE51A.insert(val);
+        
+        assertTrue(tA.myEquals(tA));
+        assertFalse(tA.myEquals(tB10));
+        assertFalse(tA.myEquals(tC18A));
+        assertFalse(tA.myEquals(tD51));
+        assertFalse(tA.myEquals(tE51A));
+        
+        
+		
+		//test empty tree：
 		BSTree empTree1 = new BSTree();
 		BSTree empTree2 = new BSTree();
 		assertTrue(empTree1.myEquals(empTree2));
+		assertFalse(empTree1.myEquals(tA));
 		
+		/**
 			//test itself:
 		assertTrue(tree.myEquals(tree));
 		
@@ -128,7 +159,7 @@ class BSTreeTest<T> {
         tree8.insert(9);
         tree8.insert(8);
         assertFalse(tree.myEquals(tree8));
-        
+        */
 	}
 
 }
