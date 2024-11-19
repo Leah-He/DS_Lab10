@@ -88,13 +88,10 @@ public class BSTNode<T extends Comparable<T>>
 
     */
    public void inOrderTraversal(Consumer<T> consume)
-   {
-	   
-	   
+   {  
 	   if (left != null) {left.inOrderTraversal(consume);}
 	   consume.accept(val);
 	   if (right != null) {right.inOrderTraversal(consume);}
-
    }
 
 
