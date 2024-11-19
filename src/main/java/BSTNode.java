@@ -24,15 +24,24 @@ public class BSTNode<T extends Comparable<T>>
 
    public BSTNode(T val, BSTNode<T> l,BSTNode<T> r)
    {
+	   this.val = val;
+	   this.left = l;
+	   this.right = r;
    }
-
-
+   
 
    /*
      Uses recursion to insert the target into the tree
     */
    public void insert(T target)
    {
+	   if (target.compareTo(val) < 0)
+	   { 
+		   if (left == null)
+		   {left = new BSTNode<>(target);} 
+		   else 
+		   {left.insert(val);}
+	   }
    }
 
 
@@ -42,6 +51,9 @@ public class BSTNode<T extends Comparable<T>>
     */
    public T retrieve(T target)
    {
+	   if (target.compareTo(val) == 0) {return val;}
+	   else if (target.compareTo(val) < 0) {return null;}
+	   else if (target.compareTo(val) > 0) {return null;}
 	return target;
    }
 
@@ -52,6 +64,9 @@ public class BSTNode<T extends Comparable<T>>
      */
    public int retrieveDepth(T target)
    {
+	   if (target.compareTo(val) == 0) {return 0;}
+	   else if (target.compareTo(val) > 0) {return 1+ retrieveDepth(val);}
+	   else if (target.compareTo(val) < 0) {return 1+ retrieveDepth(val);}
 	return 0;
    }
 
@@ -59,7 +74,9 @@ public class BSTNode<T extends Comparable<T>>
       Uses recursion to return the largest value in the tree
     */
    public T getLargest()
-   {
+   {//通常情况下都是找最右边的，因为最右边的是最大的
+	   if (left == null) {return val;}
+	   else {return right.getlargest();}
 	return null;
    }
 
@@ -72,6 +89,11 @@ public class BSTNode<T extends Comparable<T>>
     */
    public void inOrderTraversal(Consumer<T> consume)
    {
+	   
+	   
+	   if (left != null) {left.inOrderTraversal(consume);}
+	   consume.accept(val);
+	   if (right != null) {right.inOrderTraversal(consume);}
 
    }
 
@@ -87,6 +109,10 @@ public class BSTNode<T extends Comparable<T>>
     */
    public boolean myEquals(BSTNode<T> that)
    {
+	   if (that == null) {return false;}
+	   if (!val.equals(that.val)) {return false;}
+	   if ()
+	   }
 	return false;
    
 
