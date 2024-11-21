@@ -76,8 +76,7 @@ public class BSTNode<T extends Comparable<T>>
    public T getLargest()
    {//通常情况下都是找最右边的，因为最右边的是最大的
 	   if (left == null) {return val;}
-	   else {return right.getlargest();}
-	return null;
+	   else {return right.getLargest();}
    }
 
 
@@ -108,8 +107,8 @@ public class BSTNode<T extends Comparable<T>>
    {
 	   if (that == null) {return false;}
 	   if (!val.equals(that.val)) {return false;}
-	   if ()
-	   }
+	   if (left == null && that.left == null || left != null && left.myEquals(that.left)) {return true;}
+	   if (right == null && that.right == null || right != null && right.myEquals(that.right)) {return true;}
 	return false;
    
 
