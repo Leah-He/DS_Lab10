@@ -18,7 +18,9 @@ public class BSTNode<T extends Comparable<T>>
 
    public BSTNode(T val)
    {
-      this(val,null,null);
+      this.val = val;
+      this.left = null;
+      this.right = null;
    }
     
 
@@ -39,8 +41,12 @@ public class BSTNode<T extends Comparable<T>>
 	   { 
 		   if (left == null)
 		   {left = new BSTNode<>(target);} 
-		   else 
-		   {left.insert(val);}
+		   else {left.insert(target);}
+	   } else if (target.compareTo(val) > 0) 
+	   {
+		   if (right == null) 
+		   {right = new BSTNode<>(target);}
+		   else {right.insert(target);}
 	   }
    }
 
@@ -52,9 +58,18 @@ public class BSTNode<T extends Comparable<T>>
    public T retrieve(T target)
    {
 	   if (target.compareTo(val) == 0) {return val;}
-	   else if (target.compareTo(val) < 0) {return null;}
-	   else if (target.compareTo(val) > 0) {return null;}
-	return target;
+	   else if (target.compareTo(val) < 0) 
+	   {
+		   if (left == null)
+		   {return null;}
+		   else {return left.retrieve(target);}		   
+	   }
+	   else if (target.compareTo(val) > 0)
+	   {
+		   if (right == null)
+		   {return null;}
+		   else {return right.retrieve(target);}
+	   }
    }
 
 
@@ -65,9 +80,16 @@ public class BSTNode<T extends Comparable<T>>
    public int retrieveDepth(T target)
    {
 	   if (target.compareTo(val) == 0) {return 0;}
-	   else if (target.compareTo(val) > 0) {return 1+ retrieveDepth(val);}
-	   else if (target.compareTo(val) < 0) {return 1+ retrieveDepth(val);}
-	return 0;
+	   else if (target.compareTo(val) < 0) 
+	   {
+		   if (left == null) {return 1;}
+		   else {return left.retrieveDepth(target) + 1;}
+	   }
+	   else if (target.compareTo(val) > 0) 
+	   {
+		   if (right == null) {return 1;}
+		   else {return right.retrieveDepth(target) + 1;}
+	   }
    }
 
    /**
