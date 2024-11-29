@@ -38,15 +38,22 @@ public class BSTNode<T extends Comparable<T>>
    public void insert(T target)
    {
 	   if (target.compareTo(val) < 0)
-	   { 
-		   if (left == null)
-		   {left = new BSTNode<>(target);} 
-		   else {left.insert(target);}
-	   } else if (target.compareTo(val) > 0) 
 	   {
+		   if(left == null)
+		   {
+			   left = new BSTNode<>(target);
+		   } else {
+			   left.insert(target);
+		   }
+	   }
+	   //if (target.compareTo(val) > 0)
+	   else {
 		   if (right == null) 
-		   {right = new BSTNode<>(target);}
-		   else {right.insert(target);}
+		   {
+			   right = new BSTNode<>(target);
+		   } else {
+			   right.insert(target);
+		   }
 	   }
    }
 
@@ -57,19 +64,26 @@ public class BSTNode<T extends Comparable<T>>
     */
    public T retrieve(T target)
    {
-	   if (target.compareTo(val) == 0) {return val;}
+	   if (target.compareTo(val) == 0)
+	   {
+		   return val;
+	   }
 	   else if (target.compareTo(val) < 0) 
 	   {
-		   if (left == null)
-		   {return null;}
-		   else {return left.retrieve(target);}		   
+		   if(left == null)
+		   {
+			   return null;
+		   } else {
+			   return left.retrieve(target);
+		   }
+	   } else{
+		   if (right == null) {
+			   return null;
+		   } else {
+			   return right.retrieve(target);
+		   }
 	   }
-	   else if (target.compareTo(val) > 0)
-	   {
-		   if (right == null)
-		   {return null;}
-		   else {return right.retrieve(target);}
-	   }
+	   
    }
 
 
@@ -79,17 +93,22 @@ public class BSTNode<T extends Comparable<T>>
      */
    public int retrieveDepth(T target)
    {
-	   if (target.compareTo(val) == 0) {return 0;}
-	   else if (target.compareTo(val) < 0) 
+	   if (target.compareTo(val) == 0)
 	   {
-		   if (left == null) {return 1;}
-		   else {return left.retrieveDepth(target) + 1;}
-	   }
-	   else if (target.compareTo(val) > 0) 
-	   {
-		   if (right == null) {return 1;}
-		   else {return right.retrieveDepth(target) + 1;}
-	   }
+		   return 0;
+	   } else if (target.compareTo(val) < 0) {
+		   if (left ==null) {
+			   return 1;
+		   }else {
+			   return left.retrieveDepth(target) + 1;
+		   }
+	   }else {
+		   if (right == null) {
+			   return 1;
+		   }else {
+			   return right.retrieveDepth(target) + 1;
+		   }
+	   }   
    }
 
    /**
@@ -97,7 +116,7 @@ public class BSTNode<T extends Comparable<T>>
     */
    public T getLargest()
    {//通常情况下都是找最右边的，因为最右边的是最大的
-	   if (left == null) {return val;}
+	   if (right == null) {return val;}
 	   else {return right.getLargest();}
    }
 
@@ -128,12 +147,12 @@ public class BSTNode<T extends Comparable<T>>
    public boolean myEquals(BSTNode<T> that)
    {
 	   if (that == null) {return false;}
-	   if (!val.equals(that.val)) {return false;}
-	   if (left == null && that.left == null || left != null && left.myEquals(that.left)) {return true;}
-	   if (right == null && that.right == null || right != null && right.myEquals(that.right)) {return true;}
-	return false;
-   
-
+	   if (!val.equals(that.val)) {
+		   return false;
+	   }
+	   boolean checkl = (left == null && that.left == null) || (left != null && left.myEquals(that.left));
+	   boolean checkr = (right == null && that.right == null) || (right != null && right.myEquals(that.right));
+	   return checkl && checkr;
    }
 
 }

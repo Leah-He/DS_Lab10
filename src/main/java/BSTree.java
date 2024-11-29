@@ -130,8 +130,6 @@ public class BSTree
             });
       }
       return L;
-   
-   
    }
 
     /*
@@ -139,18 +137,23 @@ public class BSTree
      */
    public int sum()
    {
-	   if (root == null) {return 0;}
+	   if (root == null)
+	   {
+		   return 0;
+	   }
 	   
-	   int sum = 0;
-	   root.inOrderTraversal(
-			   new Comsumer<Integer>()
-			   {
-				   public void accept(Integer i)
-				   {
-					   sum += i;
-				   }
-			   });
-	   return sum;   
+	   final int [] sum = {0};
+	   root.inOrderTraversal(new Consumer<Integer>() {
+
+		@Override
+		public void accept(Integer t) 
+		{
+			// TODO Auto-generated method stub
+			sum[0] += t;
+		}
+		});
+	   return sum[0];
+	   
    }
 
 
@@ -177,11 +180,11 @@ public class BSTree
 		   return false;
 	   }
 	   */
-	   if (that == null)
+	   if (this.root == null && that.root == null)
 	   {
-		   return this.root == null;
+		   return true;
 	   }
-	   if (this.root == null) {
+	   if ((this.root == null && that.root != null) || (this.root != null && that.root == null)) {
 		   return false;
 	   }
 	   return this.root.myEquals(that.root);
